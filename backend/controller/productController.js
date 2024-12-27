@@ -43,7 +43,7 @@ const getProductById = async (req,res) => {
 const createProduct = async (req,res) => {
   try{
 
-    const productData = req.body;
+    const productData = req.body.data;
 
     const {error} = validateProduct(productData);
 
@@ -66,7 +66,7 @@ const createProduct = async (req,res) => {
 const updateProduct = async (req,res) => {
   try{
 
-    const productData = req.body;
+    const productData = req.body.data;
     const productId = req.params.id;
 
     const {error} = validateProduct(productData);
