@@ -7,11 +7,9 @@ import { ManageProducts } from './pages';
 
 function App() {
 
-  const [navOpen,setNavOpen] = useState(false)
-
   return (
     <div className=' flex'>
-     <Navbar Toggle={()=>{setNavOpen(!navOpen)}} isOpen={navOpen}/>
+     <Navbar/>
 
      <div className={`flex-1 h-screen`}>
       <ManageProducts/>
