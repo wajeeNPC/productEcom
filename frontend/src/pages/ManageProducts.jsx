@@ -104,7 +104,7 @@ const ManageProducts = () => {
   }, []);
 
   return (
-    <div className=" ml-72 mt-8">
+    <div className=" mt-8">
       {/* Header Section */}
       <div className=" flex justify-between mb-5">
         <div className="flex gap-3">

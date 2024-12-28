@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { cartIcon, settingIcon, userIcon } from "../assets/icons";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Navbar Component
 // This component displays the navigation menu for the application.
 
 const Navbar = () => {
+
+  const location = useLocation();
+  const navigate = useNavigate();
   
   // Menus array holds the items displayed in the sidebar, each with a title and icon.
   const Menus = [
-    { title: "Manage Products", src: cartIcon },
-    { title: "Setting", src: settingIcon, gap: true },
-    { title: "Profile", src: userIcon },
+    { title: "Manage Products", src: cartIcon, path: "/manage-products" },
+    { title: "Setting", src: settingIcon, path: "/settings", gap: true },
+    { title: "Profile", src: userIcon, path: "/profile" },
   ];
 
   return (
@@ -27,9 +31,11 @@ const Navbar = () => {
         {Menus.map((item, index) => (
           <li
             key={index}
-            className={` text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-lightWhite rounded-md ${
-              item.gap ? "mt-9" : ""
-            }`}
+            onClick={() => navigate(item.path)}
+            className={`text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 
+              ${item.gap ? "mt-9" : ""}
+              ${location.pathname === item.path ? "bg-lightWhite" : "hover:bg-lightWhite"}
+              rounded-md`}
           >
             <img src={item.src} width={25} />
             <span className={`origin-left duration-300`}>{item.title}</span>
