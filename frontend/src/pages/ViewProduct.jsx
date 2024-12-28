@@ -30,7 +30,15 @@ const ViewProduct = ({ isOpen, Toggle, productId, closeDelete }) => {
     stock: 0,
     category: "loading..",
     createdAt: "loading..",
+    updatedAt: null,
   });
+
+  // Format the date
+  const formatDate = (isoDate) => {
+    if (isoDate === "loading..") return isoDate;
+    const date = new Date(isoDate);
+    return date.toLocaleString(); // Formats to local date and time
+  };
 
   // Fetch product details from the API using the productId
   const getProduct = async () => {
@@ -83,6 +91,7 @@ const ViewProduct = ({ isOpen, Toggle, productId, closeDelete }) => {
         stock: productResult.stock,
         category: productResult.category,
         createdAt: productResult.createdAt,
+        updatedAt: productResult.updatedAt
       });
     }
   }, [productResult]);
@@ -161,11 +170,12 @@ const ViewProduct = ({ isOpen, Toggle, productId, closeDelete }) => {
                 </div>
                 <div className="text-sm">
                   <span className="text-gray-500">Added On:</span>
-                  <span className="ml-2 font-medium">Oct 15, 2023</span>
+                  <span className="ml-2 font-medium">{formatDate(productDetail.createdAt)}</span>
                 </div>
                 <div className="text-sm">
                   <span className="text-gray-500">Last Updated:</span>
-                  <span className="ml-2 font-medium">Dec 20, 2023</span>
+                  {productDetail.updatedAt && (
+                  <span className="ml-2 font-medium">{formatDate(productDetail.updatedAt)}</span>)}
                 </div>
               </div>
             </div>
