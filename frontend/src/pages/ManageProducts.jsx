@@ -69,9 +69,9 @@ const ManageProducts = () => {
   };
 
   // Filter products based on the search term entered by the user
-  const filteredProducts = products.filter((product) =>
+  const filteredProducts = Array.isArray(products) ? products.filter((product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ) : []
 
   // Update the search term as the user types in the search box
   const handleSearchChange = (e) => {
@@ -94,7 +94,14 @@ const ManageProducts = () => {
   // Update products state whenever new data is fetched
   useEffect(() => {
     if (productResult) {
-      setProducts(productResult);
+      // Check if productResult is an array or has a data property
+      if (Array.isArray(productResult)) {
+        setProducts(productResult);
+      } else if (productResult.data && Array.isArray(productResult.data)) {
+        setProducts(productResult.data);
+      } else {
+        setProducts([]); // Set to empty array if neither condition is met
+      }
     }
   }, [productResult]);
 
